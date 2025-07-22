@@ -2742,14 +2742,14 @@ class upload {
         // remove illegal file system characters
         $filename = str_replace(array_map('chr', range(0, 31)), '', $filename);
         // remove dangerous characters for file names
-        $chars = array("?", "[", "]", "/", "\\", "=", "<", ">", ":", ";", ",", "'", "\"", "&", "’", "%20",
+        $chars = array("?", "[", "]", "/", "\\", "=", "<", ">", ":", ";", ",", "'", "\"", "&", "Â’", "%20",
                        "+", "$", "#", "*", "(", ")", "|", "~", "`", "!", "{", "}", "%", "+", "^", chr(0));
         $filename = str_replace($chars, '-', $filename);
-        // remove break/tabs/return carriage
+        //Â remove break/tabs/return carriage
         $filename = preg_replace('/[\r\n\t -]+/', '-', $filename);
         // convert some special letters
-        $convert = array('Þ' => 'TH', 'þ' => 'th', 'Ð' => 'DH', 'ð' => 'dh', 'ß' => 'ss',
-                         'Œ' => 'OE', 'œ' => 'oe', 'Æ' => 'AE', 'æ' => 'ae', 'µ' => 'u');
+        $convert = array('Ãž' => 'TH', 'Ã¾' => 'th', 'Ã' => 'DH', 'Ã°' => 'dh', 'ÃŸ' => 'ss',
+                         'ÂŒ' => 'OE', 'Âœ' => 'oe', 'Ã†' => 'AE', 'Ã¦' => 'ae', 'Âµ' => 'u');
         $filename = strtr($filename, $convert);
         // remove foreign accents by converting to HTML entities, and then remove the code
         $filename = html_entity_decode( $filename, ENT_QUOTES, "utf-8" );
@@ -2793,7 +2793,7 @@ class upload {
      */
     function getsize($size) {
         if ($size === null) return null;
-        $last = strtolower($size{strlen($size)-1});
+        $last = strtolower($size[strlen($size)-1]);
         $size = (int) $size;
         switch($last) {
             case 'g':
@@ -3941,7 +3941,7 @@ class upload {
                     // unsharp mask
                     if ($gd_version >= 2 && $this->image_unsharp && is_numeric($this->image_unsharp_amount) && is_numeric($this->image_unsharp_radius) && is_numeric($this->image_unsharp_threshold)) {
                         // Unsharp Mask for PHP - version 2.1.1
-                        // Unsharp mask algorithm by Torstein Hønsi 2003-07.
+                        // Unsharp mask algorithm by Torstein HÃ¸nsi 2003-07.
                         // Used with permission
                         // Modified to support alpha transparency
                         if ($this->image_unsharp_amount > 500)    $this->image_unsharp_amount = 500;
